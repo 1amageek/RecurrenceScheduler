@@ -1,13 +1,29 @@
 {
-  "name": "functions",
+  "private": false,
+  "name": "@1amageek/recurrence-scheduler",
+  "description": "Reccurence Scheduler",
+  "contributors": [
+    {
+      "name": "Norikazu Muramoto",
+      "email": "tmy0x3@icloud.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:1amageek/RecurrenceScheduler.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "1amageek",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.1.0",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log",
     "test": "jest"
   },
   "engines": {
@@ -27,6 +43,5 @@
     "jest": "^27.3.1",
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4"
-  },
-  "private": true
+  }
 }
