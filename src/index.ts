@@ -4,6 +4,11 @@ import { Recurrenceable } from "./Recurrenceable"
 import { CalendarItemRepresentable } from "./CalendarItemRepresentable"
 import { Frequency } from "./RecurrenceRule"
 
+export * from "./Range"
+export * from "./Recurrenceable"
+export * from "./CalendarItemRepresentable"
+export * from "./RecurrenceRule"
+
 /**
  * RecurrenceSchduler
  * ItemのrecurrenceRulesをパースしてCalendarItemを返す
