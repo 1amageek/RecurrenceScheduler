@@ -18,7 +18,7 @@ export * from "./RecurrenceRule"
  */
 // TODO: テストを書く
 export class RecurrenceScheduler {
-  static calendarItems = <Item extends Recurrenceable & CalendarItemRepresentable, CalendarItem extends CalendarItemRepresentable>(id: string, item: Item, range: Range<DateTime>): CalendarItem[] => {
+  static calendarItems = <Item extends Recurrenceable & CalendarItemRepresentable, CalendarItem extends CalendarItemRepresentable>(item: Item, range: Range<DateTime>): CalendarItem[] => {
 
     if (!item.recurrenceRules.length) {
       return []
@@ -31,10 +31,12 @@ export class RecurrenceScheduler {
       const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: "UTC" }))
       if (startDate < range[0]) { return null }
       if (startDate > range[1]) { return null }
+      const timezone = item.timeZone?.identifier ?? "UTC"
+
       const calendarItem = {
         id: item.id,
         isAllDay: item.isAllDay,
-        period: [startDate.toJSDate(), endDate.toJSDate()],
+        period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: timezone }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: timezone }).toJSDate()],
         timeZone: item.timeZone
       } as CalendarItem
       return calendarItem
@@ -55,10 +57,11 @@ export class RecurrenceScheduler {
         lowerBound = occurrenceDate
       }
 
-      const endDate = rule.recurrenceEnd?.endDate != undefined ? DateTime.fromJSDate(rule.recurrenceEnd?.endDate) : undefined
-      if (endDate) {
-        if (endDate < range[0]) { continue }
-        if (range[1] < endDate) {
+      if (rule.recurrenceEnd?.endDate) {
+        let endDate = rule.recurrenceEnd.endDate
+        const endDateTime = DateTime.fromObject({ year: endDate.getUTCFullYear(), month: endDate.getMonth() + 1, day: endDate.getUTCDay(), hour: endDate.getUTCHours(), minute: endDate.getMinutes() }, { zone: "UTC" })
+        if (endDateTime < range[0]) { continue }
+        if (range[1] < endDateTime) {
           upperBound = range[1]
         }
       }
