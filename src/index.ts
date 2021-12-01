@@ -98,7 +98,7 @@ export class RecurrenceScheduler {
           const occurrenceCount = rule.recurrenceEnd?.occurrenceCount
           if (occurrenceCount) {
             if (occurrenceCount < occurredCount) { continue }
-          }
+          }          
           const [repeatFrequencyCount] = frequencyCountAndRemainder(rule.frequency, occurrenceDate.minus({ week: remainder }), upperBound, rule.interval)
           let numberOfFrequencyRemaining = repeatFrequencyCount
           let numberOfCountRemaining = 0
@@ -348,7 +348,7 @@ const frequencyCountAndRemainder = (frequency: Frequency, from: DateTime, to: Da
     }
   }
   const frequencyCount = Math.floor(lowerDiff / interval)
-  const remainder = Math.floor(lowerDiff % interval)
+  const remainder = Math.ceil(lowerDiff % interval)
   return [frequencyCount, remainder]
 }
 
