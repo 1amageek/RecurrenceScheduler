@@ -25,10 +25,10 @@ describe("Asia/Tokyo", () => {
         period: [startTime, endTime],
         timeZone: { identifier: "Asia/Tokyo" }
       }
-      const start = DateTime.fromISO("2021-01-04", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "UTC" })
       const end = DateTime.fromISO("2021-01-08", { zone: "UTC" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-03T23:00:00.000Z"))
+      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
       expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
       expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
       expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
@@ -37,6 +37,7 @@ describe("Asia/Tokyo", () => {
       expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
       expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
       expect(calendarItems.length).toEqual(4)
+      expect(Weekday)
     })
 
     test("occurrenceDateがRangeのLowerと同じ", () => {

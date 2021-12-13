@@ -25,25 +25,26 @@ export class RecurrenceScheduler {
     }
 
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
-      const timezone = "UTC"
+      const timezone = item.timeZone?.identifier ?? "UTC"
       const start = item.period[0]
       const end = item.period[1]
-      let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: timezone }), timezone)
-      const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: timezone }), timezone)
+      let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: "UTC" }), "UTC")
+      const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: "UTC" }), "UTC")
+
       if (startDate > range[1]) { return null }
-      if (startDate < range[0]) { 
+      if (startDate < range[0]) {
         if (startDate.hasSame(range[0], "day")) {
-          startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: range[0].hour, minute: range[0].minute }, { zone: timezone }), timezone)
+          startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: range[0].hour, minute: range[0].minute }, { zone: "UTC" }), "UTC")
         } else {
-          return null 
+          return null
         }
       }
-      
+
       const calendarItem = {
         id: item.id,
         isAllDay: item.isAllDay,
-        period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: item.timeZone?.identifier }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: item.timeZone?.identifier }).toJSDate()],
-        timeZone: item.timeZone
+        period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: timezone }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: timezone }).toJSDate()],
+        timeZone: { identifier: timezone }
       } as CalendarItem
       return calendarItem
     }
@@ -163,7 +164,7 @@ export class RecurrenceScheduler {
                   .plus({ day: dayOfWeek.weekNumber * 7 })
                   .plus({ day: dayOfWeek.dayOfTheWeek })
                 const calendarItem = makeCalendarItem(date, [lowerBound, upperBound])
-                if (calendarItem) {                  
+                if (calendarItem) {
                   calendarItems.push(calendarItem)
                 }
               }
