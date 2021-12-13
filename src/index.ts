@@ -25,19 +25,20 @@ export class RecurrenceScheduler {
     }
 
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
+      const timezone = item.timeZone?.identifier ?? "UTC"
       const start = item.period[0]
       const end = item.period[1]
-      let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: "UTC" }))
-      const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: "UTC" }))
+      let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: timezone }), timezone)
+      const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: timezone }), timezone)
       if (startDate > range[1]) { return null }
       if (startDate < range[0]) { 
         if (startDate.hasSame(range[0], "day")) {
-          startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: range[0].hour, minute: range[0].minute }, { zone: "UTC" }))
+          startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: range[0].hour, minute: range[0].minute }, { zone: timezone }), timezone)
         } else {
           return null 
         }
       }
-      const timezone = item.timeZone?.identifier ?? "UTC"
+      
       const calendarItem = {
         id: item.id,
         isAllDay: item.isAllDay,
@@ -357,12 +358,12 @@ const frequencyCountAndRemainder = (frequency: Frequency, from: DateTime, to: Da
   return [frequencyCount, remainder]
 }
 
-const setTime = (targetDate: DateTime, timeDate: DateTime) => {
+const setTime = (targetDate: DateTime, timeDate: DateTime, timeZone: string) => {
   const date = DateTime.fromObject({
     ...targetDate.toObject(),
     hour: timeDate.hour,
     minute: timeDate.minute
-  }, { zone: "UTC" })
+  }, { zone: timeZone })
   return date
 }
 
