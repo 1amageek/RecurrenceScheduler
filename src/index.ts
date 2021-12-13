@@ -25,7 +25,7 @@ export class RecurrenceScheduler {
     }
 
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
-      const timezone = item.timeZone?.identifier ?? "UTC"
+      const timezone = "UTC"
       const start = item.period[0]
       const end = item.period[1]
       let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: timezone }), timezone)
@@ -42,7 +42,7 @@ export class RecurrenceScheduler {
       const calendarItem = {
         id: item.id,
         isAllDay: item.isAllDay,
-        period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: timezone }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: timezone }).toJSDate()],
+        period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: item.timeZone?.identifier }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: item.timeZone?.identifier }).toJSDate()],
         timeZone: item.timeZone
       } as CalendarItem
       return calendarItem
