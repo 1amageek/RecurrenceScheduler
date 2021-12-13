@@ -4,7 +4,6 @@ import { Recurrenceable } from "./Recurrenceable"
 import { RecurrenceRule, Weekday } from "./RecurrenceRule";
 import { DateTime } from "luxon"
 
-
 describe("UTC", () => {
   describe("Daily", () => {
     const recurrenceRules: RecurrenceRule[] = [{
@@ -24,10 +23,10 @@ describe("UTC", () => {
         recurrenceRules: recurrenceRules,
         period: [startTime, endTime]
       }
-      const start = DateTime.fromISO("2021-01-04", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "UTC" })
       const end = DateTime.fromISO("2021-01-08", { zone: "UTC" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T09:00:00.000Z"))
       expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T17:00:00.000Z"))
       expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
       expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T17:00:00.000Z"))
@@ -49,10 +48,10 @@ describe("UTC", () => {
         recurrenceRules: recurrenceRules,
         period: [startTime, endTime]
       }
-      const start = DateTime.fromISO("2021-01-04", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "UTC" })
       const end = DateTime.fromISO("2021-01-08", { zone: "UTC" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T09:00:00.000Z"))
       expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T17:00:00.000Z"))
       expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
       expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T17:00:00.000Z"))
@@ -74,7 +73,7 @@ describe("UTC", () => {
         recurrenceRules: recurrenceRules,
         period: [startTime, endTime]
       }
-      const start = DateTime.fromISO("2021-01-04", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "UTC" })
       const end = DateTime.fromISO("2021-01-08", { zone: "UTC" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
       expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
@@ -316,7 +315,7 @@ describe("UTC", () => {
     }]
   
     describe("1 month", () => {
-      const start = DateTime.fromISO("2021-01-05", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-06T09", { zone: "UTC" })
       const end = DateTime.fromISO("2021-01-30", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
@@ -330,7 +329,7 @@ describe("UTC", () => {
           period: [startTime, endTime]
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T09:00:00.000Z"))
         expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T17:00:00.000Z"))
         expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T17:00:00.000Z"))
@@ -353,7 +352,7 @@ describe("UTC", () => {
           period: [startTime, endTime]
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T09:00:00.000Z"))
         expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T17:00:00.000Z"))
         expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T17:00:00.000Z"))
@@ -498,7 +497,7 @@ describe("UTC", () => {
     }]
   
     describe("1 year", () => {
-      const start = DateTime.fromISO("2021-01-05", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-06T09", { zone: "UTC" })
       const end = DateTime.fromISO("2021-01-30", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
@@ -512,7 +511,7 @@ describe("UTC", () => {
           period: [startTime, endTime]
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T09:00:00.000Z"))
         expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T17:00:00.000Z"))
         expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T17:00:00.000Z"))
@@ -535,7 +534,7 @@ describe("UTC", () => {
           period: [startTime, endTime]
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T09:00:00.000Z"))
         expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T17:00:00.000Z"))
         expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T17:00:00.000Z"))
@@ -584,7 +583,7 @@ describe("UTC", () => {
     })
   
     describe("2 years", () => {
-      const start = DateTime.fromISO("2021-01-05", { zone: "UTC" })
+      const start = DateTime.fromISO("2021-01-06T09", { zone: "UTC" })
       const end = DateTime.fromISO("2022-01-28", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
@@ -598,7 +597,7 @@ describe("UTC", () => {
           period: [startTime, endTime]
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T09:00:00.000Z"))
         expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T17:00:00.000Z"))
         expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T17:00:00.000Z"))
@@ -629,7 +628,7 @@ describe("UTC", () => {
           period: [startTime, endTime]
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T09:00:00.000Z"))
         expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T17:00:00.000Z"))
         expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T17:00:00.000Z"))

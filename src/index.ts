@@ -27,12 +27,17 @@ export class RecurrenceScheduler {
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
       const start = item.period[0]
       const end = item.period[1]
-      const startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: "UTC" }))
+      let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: "UTC" }))
       const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: "UTC" }))
-      if (startDate < range[0]) { return null }
       if (startDate > range[1]) { return null }
+      if (startDate < range[0]) { 
+        if (startDate.hasSame(range[0], "day")) {
+          startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: range[0].hour, minute: range[0].minute }, { zone: "UTC" }))
+        } else {
+          return null 
+        }
+      }
       const timezone = item.timeZone?.identifier ?? "UTC"
-
       const calendarItem = {
         id: item.id,
         isAllDay: item.isAllDay,
@@ -98,7 +103,7 @@ export class RecurrenceScheduler {
           const occurrenceCount = rule.recurrenceEnd?.occurrenceCount
           if (occurrenceCount) {
             if (occurrenceCount < occurredCount) { continue }
-          }          
+          }
           const [repeatFrequencyCount] = frequencyCountAndRemainder(rule.frequency, occurrenceDate.minus({ week: remainder }), upperBound, rule.interval)
           let numberOfFrequencyRemaining = repeatFrequencyCount
           let numberOfCountRemaining = 0
@@ -157,7 +162,7 @@ export class RecurrenceScheduler {
                   .plus({ day: dayOfWeek.weekNumber * 7 })
                   .plus({ day: dayOfWeek.dayOfTheWeek })
                 const calendarItem = makeCalendarItem(date, [lowerBound, upperBound])
-                if (calendarItem) {
+                if (calendarItem) {                  
                   calendarItems.push(calendarItem)
                 }
               }
