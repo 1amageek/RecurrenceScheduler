@@ -23,23 +23,34 @@ export class RecurrenceScheduler {
     if (!item.recurrenceRules.length) {
       return []
     }
-
+    const timezone = item.timeZone?.identifier ?? "UTC"
+    /**
+     * 期間を外れたCalendarItemはnullになる
+     * @param date CalendarItemの日付
+     * @param range CalendarItemが有効な期間
+     * @returns CalendarItem
+     */
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
-      const timezone = item.timeZone?.identifier ?? "UTC"
+
       const start = item.period[0]
       const end = item.period[1]
-      let startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: start.getUTCHours(), minute: start.getMinutes() }, { zone: "UTC" }), "UTC")
-      const endDate = setTime(date, DateTime.fromObject({ year: end.getUTCFullYear(), month: end.getMonth() + 1, day: end.getUTCDay(), hour: end.getUTCHours(), minute: end.getMinutes() }, { zone: "UTC" }), "UTC")
+
+      const startTime = DateTime.fromJSDate(start, { zone: timezone })
+      const endTime = DateTime.fromJSDate(end, { zone: timezone })
+
+      const diffMinutes = endTime.diff(startTime, "minute").minutes
+
+      let startDate = setTime(date, startTime.hour, startTime.minute, timezone)
+      const endDate = startDate.plus({ minutes: diffMinutes })
 
       if (startDate > range[1]) { return null }
       if (startDate < range[0]) {
         if (startDate.hasSame(range[0], "day")) {
-          startDate = setTime(date, DateTime.fromObject({ year: start.getUTCFullYear(), month: start.getMonth() + 1, day: start.getUTCDay(), hour: range[0].hour, minute: range[0].minute }, { zone: "UTC" }), "UTC")
+          startDate = setTime(date, range[0].hour, range[0].minute, timezone)
         } else {
           return null
         }
       }
-
       const calendarItem = {
         id: item.id,
         isAllDay: item.isAllDay,
@@ -53,7 +64,7 @@ export class RecurrenceScheduler {
     const recurrenceRules = item.recurrenceRules
 
     for (const rule of recurrenceRules) {
-      const occurrenceDate: DateTime = DateTime.fromJSDate(item.occurrenceDate, { zone: "UTC" })
+      const occurrenceDate: DateTime = DateTime.fromJSDate(item.occurrenceDate, { zone: timezone })
       if (rule.interval == 0) { continue }
       if (range[1] < occurrenceDate) { continue }
 
@@ -66,7 +77,10 @@ export class RecurrenceScheduler {
 
       if (rule.recurrenceEnd?.endDate) {
         let endDate = rule.recurrenceEnd.endDate
-        const endDateTime = DateTime.fromObject({ year: endDate.getUTCFullYear(), month: endDate.getMonth() + 1, day: endDate.getUTCDay(), hour: endDate.getUTCHours(), minute: endDate.getMinutes() }, { zone: "UTC" })
+
+        // const endDateTime = DateTime.fromObject({ year: endDate.getUTCFullYear(), month: endDate.getMonth() + 1, day: endDate.getUTCDay(), hour: endDate.getUTCHours(), minute: endDate.getMinutes() }, { zone: "UTC" })
+        const endDateTime = DateTime.fromJSDate(endDate, { zone: timezone })
+
         if (endDateTime < range[0]) { continue }
         if (range[1] < endDateTime) {
           upperBound = range[1]
@@ -359,11 +373,11 @@ const frequencyCountAndRemainder = (frequency: Frequency, from: DateTime, to: Da
   return [frequencyCount, remainder]
 }
 
-const setTime = (targetDate: DateTime, timeDate: DateTime, timeZone: string) => {
+const setTime = (targetDate: DateTime, hour: number, minute: number, timeZone: string) => {
   const date = DateTime.fromObject({
     ...targetDate.toObject(),
-    hour: timeDate.hour,
-    minute: timeDate.minute
+    hour: hour,
+    minute: minute
   }, { zone: timeZone })
   return date
 }
