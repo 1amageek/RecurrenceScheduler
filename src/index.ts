@@ -31,18 +31,15 @@ export class RecurrenceScheduler {
      * @returns CalendarItem
      */
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
-
+      
       const start = item.period[0]
       const end = item.period[1]
 
       const startTime = DateTime.fromJSDate(start, { zone: timezone })
       const endTime = DateTime.fromJSDate(end, { zone: timezone })
 
-      const diffMinutes = endTime.diff(startTime, "minute").minutes
-
       let startDate = setTime(date, startTime.hour, startTime.minute, timezone)
-      const endDate = startDate.plus({ minutes: diffMinutes })
-
+      let endDate = setTime(date, endTime.hour, endTime.minute, timezone)
       if (startDate > range[1]) { return null }
       if (startDate < range[0]) {
         if (startDate.hasSame(range[0], "day")) {
@@ -50,6 +47,9 @@ export class RecurrenceScheduler {
         } else {
           return null
         }
+      }
+      if (endDate < startDate) {
+        return null
       }
       const calendarItem = {
         id: item.id,

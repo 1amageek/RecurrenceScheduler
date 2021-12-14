@@ -14,8 +14,8 @@ describe("Asia/Tokyo", () => {
     }]
 
     test("occurrenceDateがRangeのLowerよりも小さい", () => {
-      const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-      const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
       const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
       const item: Recurrenceable & CalendarItemRepresentable = {
         id: "id",
@@ -36,13 +36,19 @@ describe("Asia/Tokyo", () => {
       expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
       expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
       expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+      expect(DateTime.fromJSDate(calendarItems[0].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-04T09:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[0].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-04T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T17:00:00.000+09:00")
       expect(calendarItems.length).toEqual(4)
       expect(Weekday)
     })
 
     test("occurrenceDateがRangeのLowerと同じ", () => {
-      const occurrenceDate = DateTime.fromISO("2021-01-04", { zone: "UTC" }).toJSDate()
-      const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const occurrenceDate = DateTime.fromISO("2021-01-04", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
       const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
       const item: Recurrenceable & CalendarItemRepresentable = {
         id: "id",
@@ -53,7 +59,7 @@ describe("Asia/Tokyo", () => {
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
-      const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })      
+      const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
       expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
       expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
@@ -67,8 +73,8 @@ describe("Asia/Tokyo", () => {
     })
 
     test("occurrenceDateがRangeのLowerより大きい", () => {
-      const occurrenceDate = DateTime.fromISO("2021-01-05", { zone: "UTC" }).toJSDate()
-      const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const occurrenceDate = DateTime.fromISO("2021-01-05", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
       const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
       const item: Recurrenceable & CalendarItemRepresentable = {
         id: "id",
@@ -81,18 +87,24 @@ describe("Asia/Tokyo", () => {
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
       const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T00:00:00.000Z"))
+      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
       expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
       expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
       expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
       expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
       expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+      expect(DateTime.fromJSDate(calendarItems[0].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[0].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-07T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-07T17:00:00.000+09:00")
       expect(calendarItems.length).toEqual(3)
     })
 
     test("occurrenceDateがRangeのUpperより大きい", () => {
       const occurrenceDate = DateTime.fromISO("2021-01-09", { zone: "UTC" }).toJSDate()
-      const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
       const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
       const item: Recurrenceable & CalendarItemRepresentable = {
         id: "id",
@@ -144,7 +156,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -168,7 +180,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerと同じ", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-04", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -192,7 +204,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-05", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -214,7 +226,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのUpperより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-09", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -234,7 +246,7 @@ describe("Asia/Tokyo", () => {
       const end = DateTime.fromISO("2021-01-17", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -258,7 +270,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerと同じ", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-04", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -282,7 +294,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-10", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -304,7 +316,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのUpperより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-17", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -333,7 +345,7 @@ describe("Asia/Tokyo", () => {
       const end = DateTime.fromISO("2021-01-30", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -357,7 +369,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerと同じ", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-06", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -381,7 +393,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-07", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -403,7 +415,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのUpperより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-10", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -423,7 +435,7 @@ describe("Asia/Tokyo", () => {
       const end = DateTime.fromISO("2021-02-28", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -447,7 +459,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerと同じ", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-06", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -471,7 +483,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-07", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -493,7 +505,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのUpperより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-03-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -523,7 +535,7 @@ describe("Asia/Tokyo", () => {
       const end = DateTime.fromISO("2021-01-30", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -547,7 +559,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerと同じ", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-06", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -571,7 +583,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-07", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -593,7 +605,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのUpperより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-10", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -613,7 +625,7 @@ describe("Asia/Tokyo", () => {
       const end = DateTime.fromISO("2022-01-28", { zone: "UTC" })
       test("occurrenceDateがRangeのLowerよりも小さい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -645,7 +657,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerと同じ", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-06", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -677,7 +689,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのLowerより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-01-07", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
@@ -699,7 +711,7 @@ describe("Asia/Tokyo", () => {
 
       test("occurrenceDateがRangeのUpperより大きい", () => {
         const occurrenceDate = DateTime.fromISO("2021-03-01", { zone: "UTC" }).toJSDate()
-        const startTime =  DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+        const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
         const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
         const item: Recurrenceable & CalendarItemRepresentable = {
           id: "id",
