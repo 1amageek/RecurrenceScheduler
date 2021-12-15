@@ -48,7 +48,7 @@ export class RecurrenceScheduler {
           return null
         }
       }
-      if (endDate < startDate) {
+      if (endDate <= startDate) {
         return null
       }
       const calendarItem = {
