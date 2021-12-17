@@ -52,11 +52,10 @@ export class RecurrenceScheduler {
         return null
       }
       const calendarItem = {
-        id: item.id,
-        isAllDay: item.isAllDay,
+        ...item,
         period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: timezone }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: timezone }).toJSDate()],
         timeZone: { identifier: timezone }
-      } as CalendarItem
+      } as unknown as CalendarItem
       return calendarItem
     }
 
