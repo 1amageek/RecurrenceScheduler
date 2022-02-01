@@ -58,7 +58,6 @@ describe("Asia/Tokyo", () => {
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        console.log(calendarItems[0].period[0], calendarItems[0].period[1])
         expect(DateTime.fromJSDate(calendarItems[0].period[0]).toISO()).toEqual("2021-12-14T11:00:00.000+09:00")
         expect(DateTime.fromJSDate(calendarItems[0].period[1]).toISO()).toEqual("2021-12-14T14:00:00.000+09:00")
       })

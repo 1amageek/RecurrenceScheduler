@@ -6,6 +6,85 @@ import { DateTime } from "luxon"
 
 describe("Asia/Tokyo", () => {
 
+  describe("Not Reccur", () => {
+    const recurrenceRules: RecurrenceRule[] = []
+
+    test("occurrenceDateがRangeのLowerよりも小さい", () => {
+      const occurrenceDate = DateTime.fromISO("2021-01-01", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
+      const item: Recurrenceable & CalendarItemRepresentable = {
+        id: "id",
+        isAllDay: false,
+        occurrenceDate: occurrenceDate,
+        recurrenceRules: recurrenceRules,
+        period: [startTime, endTime],
+        timeZone: { identifier: "Asia/Tokyo" }
+      }
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
+      const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
+      const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
+      expect(calendarItems.length).toEqual(0)
+      expect(Weekday)
+    })
+
+    test("occurrenceDateがRangeのLowerと同じ", () => {
+      const occurrenceDate = DateTime.fromISO("2021-01-04", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
+      const item: Recurrenceable & CalendarItemRepresentable = {
+        id: "id",
+        isAllDay: false,
+        occurrenceDate: occurrenceDate,
+        recurrenceRules: recurrenceRules,
+        period: [startTime, endTime],
+        timeZone: { identifier: "Asia/Tokyo" }
+      }
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
+      const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
+      const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
+      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+      expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+      expect(calendarItems.length).toEqual(1)
+    })
+
+    test("occurrenceDateがRangeのLowerより大きい", () => {
+      const occurrenceDate = DateTime.fromISO("2021-01-05", { zone: "Asia/Tokyo" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
+      const item: Recurrenceable & CalendarItemRepresentable = {
+        id: "id",
+        isAllDay: false,
+        occurrenceDate: occurrenceDate,
+        recurrenceRules: recurrenceRules,
+        period: [startTime, endTime],
+        timeZone: { identifier: "Asia/Tokyo" }
+      }
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
+      const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
+      const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
+      expect(calendarItems.length).toEqual(0)
+    })
+
+    test("occurrenceDateがRangeのUpperより大きい", () => {
+      const occurrenceDate = DateTime.fromISO("2021-01-09", { zone: "UTC" }).toJSDate()
+      const startTime = DateTime.fromISO("2021-01-01T08", { zone: "Asia/Tokyo" }).toJSDate()
+      const endTime = DateTime.fromISO("2021-01-01T17", { zone: "Asia/Tokyo" }).toJSDate()
+      const item: Recurrenceable & CalendarItemRepresentable = {
+        id: "id",
+        isAllDay: false,
+        occurrenceDate: occurrenceDate,
+        recurrenceRules: recurrenceRules,
+        period: [startTime, endTime],
+        timeZone: { identifier: "Asia/Tokyo" }
+      }
+      const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
+      const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
+      const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
+      expect(calendarItems.length).toEqual(0)
+    })
+  })
+
   describe("Daily", () => {
     const recurrenceRules: RecurrenceRule[] = [{
       firstDayOfTheWeek: 0,
