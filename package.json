@@ -20,7 +20,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.2.1",
+  "version": "0.3.0",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "./node_modules/.bin/tsc -d",
@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
