@@ -34,8 +34,10 @@ export class RecurrenceScheduler {
       const startTime = DateTime.fromJSDate(start, { zone: timezone })
       const endTime = DateTime.fromJSDate(end, { zone: timezone })
 
+      const diff = endTime.diff(startTime)
+
       let startDate = setTime(date, startTime.hour, startTime.minute, timezone)
-      let endDate = setTime(date, endTime.hour, endTime.minute, timezone)
+      let endDate = startDate.plus(diff)
       if (startDate > range[1]) { return null }
       if (startDate < range[0]) {
         if (startDate.hasSame(range[0], "day")) {
