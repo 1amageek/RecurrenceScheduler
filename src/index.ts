@@ -28,8 +28,8 @@ export class RecurrenceScheduler {
      */
     const makeCalendarItem = (date: DateTime, range: Range<DateTime>): CalendarItem | null => {
       
-      const start = item.period[0]
-      const end = item.period[1]
+      const start = item.startDate
+      const end = item.endDate
 
       const startTime = DateTime.fromJSDate(start, { zone: timezone })
       const endTime = DateTime.fromJSDate(end, { zone: timezone })
@@ -49,9 +49,13 @@ export class RecurrenceScheduler {
       if (endDate <= startDate) {
         return null
       }
-      const calendarItem = {
+
+      const calendarItem: CalendarItem = {
         ...item,
-        period: [DateTime.fromObject({ ...startDate.toObject() }, { zone: timezone }).toJSDate(), DateTime.fromObject({ ...endDate.toObject() }, { zone: timezone }).toJSDate()],
+        id: item.id,
+        isAllDay: item.isAllDay,
+        startDate: DateTime.fromObject({ ...startDate.toObject() }, { zone: timezone }).toJSDate(),
+        endDate: DateTime.fromObject({ ...endDate.toObject() }, { zone: timezone }).toJSDate(),
         timeZone: { identifier: timezone }
       } as unknown as CalendarItem
       return calendarItem

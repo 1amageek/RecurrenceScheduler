@@ -18,7 +18,8 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
@@ -37,14 +38,15 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
       const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
-      expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+      expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+      expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
       expect(calendarItems.length).toEqual(1)
     })
 
@@ -57,7 +59,8 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
@@ -75,7 +78,8 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
@@ -101,26 +105,27 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
       const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
-      expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
-      expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-      expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-      expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-      expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-      expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-      expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-      expect(DateTime.fromJSDate(calendarItems[0].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-04T09:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[0].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-04T17:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[1].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T08:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[1].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T17:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[2].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T08:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[2].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T17:00:00.000+09:00")
+      expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+      expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+      expect(calendarItems[1].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+      expect(calendarItems[1].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+      expect(calendarItems[2].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+      expect(calendarItems[2].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+      expect(calendarItems[3].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+      expect(calendarItems[3].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+      expect(DateTime.fromJSDate(calendarItems[0].startDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-04T09:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[0].endDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-04T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].startDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].endDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].startDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].endDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T17:00:00.000+09:00")
       expect(calendarItems.length).toEqual(4)
       expect(Weekday)
     })
@@ -134,20 +139,21 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
       const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
-      expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
-      expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-      expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-      expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-      expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-      expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-      expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+      expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+      expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+      expect(calendarItems[1].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+      expect(calendarItems[1].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+      expect(calendarItems[2].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+      expect(calendarItems[2].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+      expect(calendarItems[3].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+      expect(calendarItems[3].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
       expect(calendarItems.length).toEqual(4)
     })
 
@@ -160,24 +166,25 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
       const end = DateTime.fromISO("2021-01-08", { zone: "Asia/Tokyo" })
       const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-      expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-      expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-      expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-      expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-      expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-      expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-      expect(DateTime.fromJSDate(calendarItems[0].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T08:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[0].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T17:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[1].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T08:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[1].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T17:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[2].period[0], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-07T08:00:00.000+09:00")
-      expect(DateTime.fromJSDate(calendarItems[2].period[1], { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-07T17:00:00.000+09:00")
+      expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+      expect(calendarItems[0].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+      expect(calendarItems[1].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+      expect(calendarItems[1].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+      expect(calendarItems[2].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+      expect(calendarItems[2].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+      expect(DateTime.fromJSDate(calendarItems[0].startDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[0].endDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-05T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].startDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[1].endDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-06T17:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].startDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-07T08:00:00.000+09:00")
+      expect(DateTime.fromJSDate(calendarItems[2].endDate, { zone: "Asia/Tokyo" }).toISO()).toEqual("2021-01-07T17:00:00.000+09:00")
       expect(calendarItems.length).toEqual(3)
     })
 
@@ -190,7 +197,8 @@ describe("Asia/Tokyo", () => {
         isAllDay: false,
         occurrenceDate: occurrenceDate,
         recurrenceRules: recurrenceRules,
-        period: [startTime, endTime],
+        startDate: startTime,
+        endDate: endTime,
         timeZone: { identifier: "Asia/Tokyo" }
       }
       const start = DateTime.fromISO("2021-01-04T09", { zone: "Asia/Tokyo" })
@@ -242,18 +250,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(4)
       })
 
@@ -266,18 +275,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(4)
       })
 
@@ -290,16 +300,17 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-05T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(3)
       })
 
@@ -312,7 +323,8 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
@@ -332,18 +344,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-03T23:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-03T23:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(10)
       })
 
@@ -356,18 +369,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-04T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-04T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-04T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-05T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-04T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-04T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-04T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-05T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(10)
       })
 
@@ -380,16 +394,17 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-10T23:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-11T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-11T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-12T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-12T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-13T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-10T23:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-11T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-11T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-12T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-12T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-13T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(5)
       })
 
@@ -402,7 +417,8 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
@@ -431,18 +447,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(4)
       })
 
@@ -455,18 +472,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-06T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(4)
       })
 
@@ -479,16 +497,17 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-07T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-07T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(3)
       })
 
@@ -501,7 +520,8 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
@@ -521,18 +541,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(8)
       })
 
@@ -545,18 +566,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-06T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(8)
       })
 
@@ -569,16 +591,17 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-07T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-07T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(7)
       })
 
@@ -591,7 +614,8 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
@@ -621,18 +645,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(4)
       })
 
@@ -645,18 +670,19 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-06T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(4)
       })
 
@@ -669,16 +695,17 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-07T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-07T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(3)
       })
 
@@ -691,7 +718,8 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
@@ -711,26 +739,27 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-05T23:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
-        expect(calendarItems[4].period[0]).toEqual(new Date("2022-01-05T23:00:00.000Z"))
-        expect(calendarItems[4].period[1]).toEqual(new Date("2022-01-06T08:00:00.000Z"))
-        expect(calendarItems[5].period[0]).toEqual(new Date("2022-01-06T23:00:00.000Z"))
-        expect(calendarItems[5].period[1]).toEqual(new Date("2022-01-07T08:00:00.000Z"))
-        expect(calendarItems[6].period[0]).toEqual(new Date("2022-01-07T23:00:00.000Z"))
-        expect(calendarItems[6].period[1]).toEqual(new Date("2022-01-08T08:00:00.000Z"))
-        expect(calendarItems[7].period[0]).toEqual(new Date("2022-01-08T23:00:00.000Z"))
-        expect(calendarItems[7].period[1]).toEqual(new Date("2022-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-05T23:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[4].startDate).toEqual(new Date("2022-01-05T23:00:00.000Z"))
+        expect(calendarItems[4].endDate).toEqual(new Date("2022-01-06T08:00:00.000Z"))
+        expect(calendarItems[5].startDate).toEqual(new Date("2022-01-06T23:00:00.000Z"))
+        expect(calendarItems[5].endDate).toEqual(new Date("2022-01-07T08:00:00.000Z"))
+        expect(calendarItems[6].startDate).toEqual(new Date("2022-01-07T23:00:00.000Z"))
+        expect(calendarItems[6].endDate).toEqual(new Date("2022-01-08T08:00:00.000Z"))
+        expect(calendarItems[7].startDate).toEqual(new Date("2022-01-08T23:00:00.000Z"))
+        expect(calendarItems[7].endDate).toEqual(new Date("2022-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(8)
       })
 
@@ -743,26 +772,27 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-06T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-06T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-06T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[3].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[3].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
-        expect(calendarItems[4].period[0]).toEqual(new Date("2022-01-05T23:00:00.000Z"))
-        expect(calendarItems[4].period[1]).toEqual(new Date("2022-01-06T08:00:00.000Z"))
-        expect(calendarItems[5].period[0]).toEqual(new Date("2022-01-06T23:00:00.000Z"))
-        expect(calendarItems[5].period[1]).toEqual(new Date("2022-01-07T08:00:00.000Z"))
-        expect(calendarItems[6].period[0]).toEqual(new Date("2022-01-07T23:00:00.000Z"))
-        expect(calendarItems[6].period[1]).toEqual(new Date("2022-01-08T08:00:00.000Z"))
-        expect(calendarItems[7].period[0]).toEqual(new Date("2022-01-08T23:00:00.000Z"))
-        expect(calendarItems[7].period[1]).toEqual(new Date("2022-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-06T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-06T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-06T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[3].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[3].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[4].startDate).toEqual(new Date("2022-01-05T23:00:00.000Z"))
+        expect(calendarItems[4].endDate).toEqual(new Date("2022-01-06T08:00:00.000Z"))
+        expect(calendarItems[5].startDate).toEqual(new Date("2022-01-06T23:00:00.000Z"))
+        expect(calendarItems[5].endDate).toEqual(new Date("2022-01-07T08:00:00.000Z"))
+        expect(calendarItems[6].startDate).toEqual(new Date("2022-01-07T23:00:00.000Z"))
+        expect(calendarItems[6].endDate).toEqual(new Date("2022-01-08T08:00:00.000Z"))
+        expect(calendarItems[7].startDate).toEqual(new Date("2022-01-08T23:00:00.000Z"))
+        expect(calendarItems[7].endDate).toEqual(new Date("2022-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(8)
       })
 
@@ -775,16 +805,17 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(calendarItems[0].period[0]).toEqual(new Date("2021-01-07T00:00:00.000Z"))
-        expect(calendarItems[0].period[1]).toEqual(new Date("2021-01-07T08:00:00.000Z"))
-        expect(calendarItems[1].period[0]).toEqual(new Date("2021-01-07T23:00:00.000Z"))
-        expect(calendarItems[1].period[1]).toEqual(new Date("2021-01-08T08:00:00.000Z"))
-        expect(calendarItems[2].period[0]).toEqual(new Date("2021-01-08T23:00:00.000Z"))
-        expect(calendarItems[2].period[1]).toEqual(new Date("2021-01-09T08:00:00.000Z"))
+        expect(calendarItems[0].startDate).toEqual(new Date("2021-01-07T00:00:00.000Z"))
+        expect(calendarItems[0].endDate).toEqual(new Date("2021-01-07T08:00:00.000Z"))
+        expect(calendarItems[1].startDate).toEqual(new Date("2021-01-07T23:00:00.000Z"))
+        expect(calendarItems[1].endDate).toEqual(new Date("2021-01-08T08:00:00.000Z"))
+        expect(calendarItems[2].startDate).toEqual(new Date("2021-01-08T23:00:00.000Z"))
+        expect(calendarItems[2].endDate).toEqual(new Date("2021-01-09T08:00:00.000Z"))
         expect(calendarItems.length).toEqual(7)
       })
 
@@ -797,7 +828,8 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate,
           recurrenceRules: recurrenceRules,
-          period: [startTime, endTime],
+          startDate: startTime,
+          endDate: endTime,
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])

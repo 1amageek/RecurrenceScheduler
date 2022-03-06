@@ -54,12 +54,13 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate.toJSDate(),
           recurrenceRules: recurrenceRules,
-          period: [startTime.toJSDate(), endTime.toJSDate()],
+          startDate: startTime.toJSDate(),
+          endDate: endTime.toJSDate(),
           timeZone: { identifier: "Asia/Tokyo" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(DateTime.fromJSDate(calendarItems[0].period[0]).toISO()).toEqual("2021-12-14T11:00:00.000+09:00")
-        expect(DateTime.fromJSDate(calendarItems[0].period[1]).toISO()).toEqual("2021-12-14T14:00:00.000+09:00")
+        expect(DateTime.fromJSDate(calendarItems[0].startDate).toISO()).toEqual("2021-12-14T11:00:00.000+09:00")
+        expect(DateTime.fromJSDate(calendarItems[0].endDate).toISO()).toEqual("2021-12-14T14:00:00.000+09:00")
       })
     })
 
@@ -70,12 +71,13 @@ describe("Asia/Tokyo", () => {
           isAllDay: false,
           occurrenceDate: occurrenceDate.setZone("UTC").toJSDate(),
           recurrenceRules: recurrenceRules,
-          period: [startTime.setZone("UTC").toJSDate(), endTime.setZone("UTC").toJSDate()],
+          startDate: startTime.setZone("UTC").toJSDate(),
+          endDate: endTime.setZone("UTC").toJSDate(),
           timeZone: { identifier: "UTC" }
         }
         const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-        expect(DateTime.fromJSDate(calendarItems[0].period[0]).toISO()).toEqual("2021-12-15T10:00:00.000+09:00")
-        expect(DateTime.fromJSDate(calendarItems[0].period[1]).toISO()).toEqual("2021-12-15T14:00:00.000+09:00")
+        expect(DateTime.fromJSDate(calendarItems[0].startDate).toISO()).toEqual("2021-12-15T10:00:00.000+09:00")
+        expect(DateTime.fromJSDate(calendarItems[0].endDate).toISO()).toEqual("2021-12-15T14:00:00.000+09:00")
       })
     })
 
@@ -90,8 +92,8 @@ describe("Asia/Tokyo", () => {
     //       timeZone: { identifier: "Asia/Tokyo" }
     //     }
     //     const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-    //     expect(calendarItems[0].period[0]).toEqual(new Date("2021-12-15T00:00:00.000Z"))
-    //     expect(calendarItems[0].period[1]).toEqual(new Date("2021-12-15T09:00:00.000Z"))
+    //     expect(calendarItems[0].startDate).toEqual(new Date("2021-12-15T00:00:00.000Z"))
+    //     expect(calendarItems[0].endDate).toEqual(new Date("2021-12-15T09:00:00.000Z"))
     //   })
     // })
 
@@ -102,12 +104,13 @@ describe("Asia/Tokyo", () => {
     //       isAllDay: false,
     //       occurrenceDate: occurrenceDate.setZone("Asia/Tokyo").toJSDate(),
     //       recurrenceRules: recurrenceRules,
-    //       period: [startTime.toJSDate(), endTime.toJSDate()],
+    //                 startDate: startTime.toJSDate(),
+          // endDate: endTime.toJSDate(),
     //       timeZone: { identifier: "Asia/Tokyo" }
     //     }
     //     const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-    //     expect(calendarItems[0].period[0]).toEqual(new Date("2021-12-15T00:00:00.000Z"))
-    //     expect(calendarItems[0].period[1]).toEqual(new Date("2021-12-15T09:00:00.000Z"))
+    //     expect(calendarItems[0].startDate).toEqual(new Date("2021-12-15T00:00:00.000Z"))
+    //     expect(calendarItems[0].endDate).toEqual(new Date("2021-12-15T09:00:00.000Z"))
     //   })
     // })
 
@@ -122,8 +125,8 @@ describe("Asia/Tokyo", () => {
     //       timeZone: { identifier: "Asia/Tokyo" }
     //     }
     //     const calendarItems = RecurrenceScheduler.calendarItems(item, [start, end])
-    //     expect(calendarItems[0].period[0]).toEqual(new Date("2021-12-15T00:00:00.000Z"))
-    //     expect(calendarItems[0].period[1]).toEqual(new Date("2021-12-15T09:00:00.000Z"))
+    //     expect(calendarItems[0].startDate).toEqual(new Date("2021-12-15T00:00:00.000Z"))
+    //     expect(calendarItems[0].endDate).toEqual(new Date("2021-12-15T09:00:00.000Z"))
     //   })
     // })
   })
